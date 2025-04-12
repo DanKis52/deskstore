@@ -375,6 +375,9 @@
   .modal-content {
     flex-direction: column; /* Stack image and text vertically */
     align-items: center; /* Center-align content */
+    max-height: 100vh;
+    border-radius: 0;
+    padding-bottom: 40px;
   }
   .modal-image {
     width: 100%; /* Image takes full width */
@@ -386,6 +389,9 @@
   .modal-image-container{
     width: 100%;
     padding: 0;
+  }
+  .modal-overlay {
+    align-items: normal; /* Center the modal vertically */
   }
 }
 
@@ -418,6 +424,9 @@
   .modal-content {
     flex-direction: column; /* Stack image and text vertically */
     align-items: center; /* Center-align content */
+    max-height: 100vh;
+    border-radius: 0;
+    padding-bottom: 40px;
   }
   .modal-image {
     width: 100%; /* Image takes full width */
@@ -429,6 +438,9 @@
   .modal-image-container{
     width: 100%;
     padding: 0;
+  }
+  .modal-overlay {
+    align-items: normal; /* Center the modal vertically */
   }
 }
 
