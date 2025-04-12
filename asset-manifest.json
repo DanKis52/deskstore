@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/deskstore/static/css/main.54164361.css",
+    "main.js": "/deskstore/static/js/main.b39e2648.js",
+    "static/js/453.264640a6.chunk.js": "/deskstore/static/js/453.264640a6.chunk.js",
+    "index.html": "/deskstore/index.html",
+    "main.54164361.css.map": "/deskstore/static/css/main.54164361.css.map",
+    "main.b39e2648.js.map": "/deskstore/static/js/main.b39e2648.js.map",
+    "453.264640a6.chunk.js.map": "/deskstore/static/js/453.264640a6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54164361.css",
+    "static/js/main.b39e2648.js"
+  ]
+}
