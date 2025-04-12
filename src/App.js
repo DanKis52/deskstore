@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import './App.css';
 
@@ -19,10 +19,8 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <nav>
             <Link to="/" className="App-logo-text">MAX_STOL</Link>
             <button className="App-call-button">Заказать звонок</button>
-          </nav>
         </header>
         <Banner />
         <Home openModal={openModal} />
@@ -154,7 +152,9 @@ function Home({ openModal }) {
 function ProductCard({ image, title, price, oldPrice, badge, onClick }) {
   return (
     <div className="product-card" onClick={onClick}>
-      <img src={image} alt={title} className="product-image" />
+      <div className="product-image-container">
+        <img src={image} alt={title} className="product-image" />
+      </div>
       <div className="product-info">
         <span className="product-badge">{badge}</span>
         <h3 className="product-title">{title}</h3>
@@ -168,16 +168,95 @@ function ProductCard({ image, title, price, oldPrice, badge, onClick }) {
 }
 
 function ProductModal({ product, closeModal }) {
+  const [selectedOptions, setSelectedOptions] = useState({
+    tabletopColor: null,
+    frameColor: null,
+    depth: null,
+    length: null,
+  });
+
+  const handleOptionChange = (optionType, value) => {
+    setSelectedOptions((prev) => ({ ...prev, [optionType]: value }));
+  };
+
+  const handleOrder = () => {
+    console.log('Заказ оформлен с параметрами:', selectedOptions);
+    closeModal();
+  };
+
   return (
     <div className="modal-overlay show" onClick={closeModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-icon" onClick={closeModal} aria-label="Close">
           &times;
         </button>
-        <img src={product.image} alt={product.title} className="modal-image" />
+        <div className="modal-image-container">
+          <img src={product.image} alt={product.title} className="modal-image" />
+        </div>
         <div className="modal-text">
           <h2>{product.title}</h2>
           <p>{product.description}</p>
+          <div className="modal-options">
+            <div className="option-group">
+              <h4>Цвет столешницы</h4>
+              <div className="option-buttons">
+                {['Белый', 'Дуб', 'Орех', 'Черный'].map((color) => (
+                  <button
+                    key={color}
+                    className={`option-button ${selectedOptions.tabletopColor === color ? 'selected' : ''}`}
+                    onClick={() => handleOptionChange('tabletopColor', color)}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="option-group">
+              <h4>Цвет металлокаркаса</h4>
+              <div className="option-buttons">
+                {['Белый', 'Серый', 'Черный'].map((color) => (
+                  <button
+                    key={color}
+                    className={`option-button ${selectedOptions.frameColor === color ? 'selected' : ''}`}
+                    onClick={() => handleOptionChange('frameColor', color)}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="option-group">
+              <h4>Глубина</h4>
+              <div className="option-buttons">
+                {['60 см', '70 см', '80 см'].map((depth) => (
+                  <button
+                    key={depth}
+                    className={`option-button ${selectedOptions.depth === depth ? 'selected' : ''}`}
+                    onClick={() => handleOptionChange('depth', depth)}
+                  >
+                    {depth}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="option-group">
+              <h4>Длина</h4>
+              <div className="option-buttons">
+                {['80 см', '100 см', '120 см', '140 см', '160 см', '180 см', '200 см'].map((length) => (
+                  <button
+                    key={length}
+                    className={`option-button ${selectedOptions.length === length ? 'selected' : ''}`}
+                    onClick={() => handleOptionChange('length', length)}
+                  >
+                    {length}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <button className="modal-order-button" onClick={handleOrder}>
+              Заказать
+            </button>
+          </div>
         </div>
       </div>
     </div>
